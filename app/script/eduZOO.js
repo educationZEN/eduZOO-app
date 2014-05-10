@@ -2,6 +2,7 @@ angular.module("eduZOO", []).directive("quiz", function() {
     return {
         restrict: "E",
         transclude: true,
+        scope: {},
         templateUrl: "app/templates/quiz.html",
         controller: function($scope) {
 
@@ -12,14 +13,12 @@ angular.module("eduZOO", []).directive("quiz", function() {
             }
 
             $scope.checkAnswer = function() {
-                console.log(answers)
                 var resolution = true
                 angular.forEach(answers, function(answer) {
                     if (!checkAnswer(answer)) {
                         resolution = false
                     }
                 })
-                console.log("resolution=" + resolution)
                 $scope.resolution = resolution
             }
 
