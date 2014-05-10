@@ -1,4 +1,7 @@
-angular.module("eduZOO", []).directive("quiz", function() {
+angular.module("eduZOO", []).config(function($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist(["http://educationZEN.github.io/eduZOO-app/**"])
+})
+.directive("quiz", function() {
     return {
         restrict: "E",
         transclude: true,
@@ -27,7 +30,8 @@ angular.module("eduZOO", []).directive("quiz", function() {
             }
         }
     }
-}).directive("answer", function() {
+})
+.directive("answer", function() {
     return {
         require: "^quiz",
         restrict: "E",
