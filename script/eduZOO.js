@@ -1,12 +1,11 @@
-angular.module("eduZOO", []).config(function($sceDelegateProvider) {
-    $sceDelegateProvider.resourceUrlWhitelist(["http://educationZEN.github.io/eduZOO-app/**"])
-})
+angular.module("eduZOO", [])
 .directive("quiz", function() {
     return {
         restrict: "E",
         transclude: true,
         scope: {},
-        templateUrl: "http://educationZEN.github.io/eduZOO-app/templates/quiz.html",
+        template: "<div ng-transclude></div><button ng-click=\"checkAnswer()\">Antwort prüfen</button>" +
+            "<img ng-show=\"resolution != undefined\" ng-src=\"{{'../eduZOO-app/images/' + (resolution ? 'correct.png' : 'wrong.png')}}\">",
         controller: function($scope) {
 
             var answers = []
