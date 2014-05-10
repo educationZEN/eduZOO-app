@@ -2,7 +2,7 @@ angular.module("eduZOO", []).directive("quiz", function() {
     return {
         restrict: "E",
         transclude: true,
-        template: "<div ng-transclude></div><button ng-click='checkAnswer()'>Antwort prüfen</button>",
+        templateUrl: "app/templates/quiz.html",
         controller: function($scope) {
 
             var answers = []
@@ -13,13 +13,14 @@ angular.module("eduZOO", []).directive("quiz", function() {
 
             $scope.checkAnswer = function() {
                 console.log(answers)
-                var correct = true
+                var resolution = true
                 angular.forEach(answers, function(answer) {
                     if (!checkAnswer(answer)) {
-                        correct = false
+                        resolution = false
                     }
                 })
-                console.log("correct=" + correct)
+                console.log("resolution=" + resolution)
+                $scope.resolution = resolution
             }
 
             function checkAnswer(answer) {
@@ -35,7 +36,7 @@ angular.module("eduZOO", []).directive("quiz", function() {
         scope: {
             correct: "@"
         },
-        template: "<br /><input type='checkbox' ng-model='checked'><span ng-transclude></span>",
+        template: "<br /><input type='checkbox' ng-model='checked'> <span ng-transclude></span>",
         link: function(scope, element, attrs, controller) {
             controller.addAnswer(scope)
         }
