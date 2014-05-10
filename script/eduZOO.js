@@ -3,7 +3,7 @@ angular.module("eduZOO", []).directive("quiz", function() {
         restrict: "E",
         transclude: true,
         scope: {},
-        templateUrl: "../eduZOO-app/templates/quiz.html",
+        templateUrl: "http://educationZEN.github.io/eduZOO-app/templates/quiz.html",
         controller: function($scope) {
 
             var answers = []
