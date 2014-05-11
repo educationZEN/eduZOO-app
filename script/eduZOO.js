@@ -4,6 +4,8 @@ angular.module("eduZOO", [])
         restrict: "E",
         transclude: true,
         scope: {},
+        /* Note: due to security restrictions in Firefox and Chrome loading templates by  */
+        /* (relative) URL doesn't work when page is loaded via file: (in Safari it works) */
         template: "<div ng-transclude></div><button ng-click=\"checkAnswer()\">Antwort prüfen</button>" +
             "<img ng-show=\"resolution != undefined\" ng-src=\"{{'../eduZOO-app/images/' + (resolution ? 'correct.png' : 'wrong.png')}}\">",
         controller: function($scope) {
@@ -25,12 +27,18 @@ angular.module("eduZOO", [])
             }
 
             function checkAnswer(answer) {
-                return (answer.correct == "") == (answer.checked == true)
+                if (answer.text != undefined) {
+                    // text input
+                    return answer.correct == answer.text
+                } else {
+                    // multiple choice
+                    return (answer.correct == "") == answer.checked
+                }
             }
         }
     }
 })
-.directive("answer", function() {
+.directive("choice", function() {
     return {
         require: "^quiz",
         restrict: "E",
@@ -38,7 +46,20 @@ angular.module("eduZOO", [])
         scope: {
             correct: "@"
         },
-        template: "<br /><input type='checkbox' ng-model='checked'> <span ng-transclude></span>",
+        template: "<br /><input type='checkbox' ng-model='checked' ng-init='checked=false'> <span ng-transclude></span>",
+        link: function(scope, element, attrs, controller) {
+            controller.addAnswer(scope)
+        }
+    }
+})
+.directive("textinput", function() {
+    return {
+        require: "^quiz",
+        restrict: "E",
+        scope: {
+            correct: "@"
+        },
+        template: "<br /><input type='text' ng-model='text' ng-init='text=\"\"'>",
         link: function(scope, element, attrs, controller) {
             controller.addAnswer(scope)
         }
