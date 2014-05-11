@@ -6,7 +6,7 @@ angular.module("eduZOO", [])
         scope: {},
         /* Note: due to security restrictions in Firefox and Chrome loading templates by  */
         /* (relative) URL doesn't work when page is loaded via file: (in Safari it works) */
-        template: "<div ng-transclude></div><button ng-click=\"checkAnswer()\">Antwort prüfen</button>" +
+        template: "<div ng-transclude></div><button ng-click=\"checkAnswers()\">Antwort prüfen</button>" +
             "<img ng-show=\"resolution != undefined\" ng-src=\"{{'../eduZOO-app/images/' + (resolution ? 'correct.png' : 'wrong.png')}}\">",
         controller: function($scope) {
 
@@ -16,7 +16,17 @@ angular.module("eduZOO", [])
                 answers.push(scope)
             }
 
-            $scope.checkAnswer = function() {
+            // called from "textinput" child view (when pressing Return in the input field)
+            this.checkAnswers = function() {
+                checkAnswers()
+            }
+
+            // called from this "quiz" view (when clicking the "Prüfen" button)
+            $scope.checkAnswers = function() {
+                checkAnswers()
+            }
+
+            function checkAnswers() {
                 var resolution = true
                 angular.forEach(answers, function(answer) {
                     if (!checkAnswer(answer)) {
@@ -59,9 +69,14 @@ angular.module("eduZOO", [])
         scope: {
             correct: "@"
         },
-        template: "<br /><input type='text' ng-model='text' ng-init='text=\"\"'>",
+        template: "<br /><input type='text' ng-model='text' ng-init='text=\"\"' ng-keypress='handleKey($event.keyCode)'>",
         link: function(scope, element, attrs, controller) {
             controller.addAnswer(scope)
+            scope.handleKey = function(keyCode) {    
+                if (keyCode == 13) {
+                    controller.checkAnswers()
+                }
+            }
         }
     }
 })
