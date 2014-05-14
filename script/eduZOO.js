@@ -39,7 +39,7 @@ angular.module("eduZOO", [])
             function checkAnswer(answer) {
                 if (answer.text != undefined) {
                     // text input
-                    return answer.correct == answer.text
+                    return new RegExp("^" + answer.correct + "$", "i").test(answer.text)
                 } else {
                     // multiple choice
                     return (answer.correct == "") == answer.checked
