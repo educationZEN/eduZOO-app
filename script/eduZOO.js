@@ -7,7 +7,7 @@ angular.module("eduZOO", [])
         /* Note: due to security restrictions in Firefox and Chrome loading templates by  */
         /* (relative) URL doesn't work when page is loaded via file: (in Safari it works) */
         template: "<div ng-transclude></div><button ng-click=\"checkAnswers()\">Antwort prüfen</button>" +
-            "<img ng-show=\"resolution != undefined\" ng-src=\"{{'../eduZOO-app/images/' + (resolution ? 'correct.png' : 'wrong.png')}}\">",
+            "<img ng-show=\"resolution != undefined\" ng-src=\"{{imagesBasePath() + (resolution ? 'correct.png' : 'wrong.png')}}\">",
         controller: function($scope) {
 
             var answers = []
@@ -44,6 +44,37 @@ angular.module("eduZOO", [])
                     // multiple choice
                     return (answer.correct == "") == answer.checked
                 }
+            }
+
+            // ---
+
+            $scope.imagesBasePath = function() {
+                var IMAGES_DIR = "eduZOO-app/images/"
+                return repeat("../", dirLevel()) + IMAGES_DIR
+            }
+
+            function dirLevel() {
+                var INSTALL_DIR = "/eduZOO";
+                var path = location.pathname
+                var i = path.lastIndexOf(INSTALL_DIR + "/")
+                if (i == -1) {
+                    throw "installation directory \"" + INSTALL_DIR + "/\" not found in \"" + path + "\""
+                }
+                var localPath = path.substr(i + INSTALL_DIR.length)
+                var matches = localPath.match(/\//g)
+                if (!matches) {
+                    throw "\"/\" not found in local path \"" + localPath + "\""
+                }
+                var dirLevel = matches.length
+                return dirLevel
+            }
+
+            function repeat(string, times) {
+                var s = ""
+                for (var i = 0; i < times; i++) {
+                    s += string
+                }
+                return s
             }
         }
     }
