@@ -1,0 +1,10 @@
+
+IMPORTANT when updating MathJax for eduZOO
+------------------------------------------
+
+Add the `displayAlign` setting to MathJax/config/TeX-AMS_HTML.js:
+
+    MathJax.Hub.Config({
+        "v1.0-compatible": false,
+        displayAlign: "left"
+    });
