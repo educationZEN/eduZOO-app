@@ -100,6 +100,20 @@ angular.module("eduZOO", [])
     }
 })
 .service("eduUtils", function() {
+
+    this.loadScript = function(path) {
+        var script = document.createElement("script")
+        script.src = this.path(path)
+        document.head.appendChild(script)
+    }
+
+    this.loadStylesheet = function(path) {
+        var link = document.createElement("link")
+        link.rel = "stylesheet"
+        link.href = this.path(path)
+        document.head.appendChild(link)
+    }
+
     this.path = function(relPath) {
         return repeat("../", dirLevel()) + relPath
     }
@@ -129,9 +143,6 @@ angular.module("eduZOO", [])
     }
 })
 .run(function(eduUtils) {
-    // load stylesheet
-    var link = document.createElement("link")
-    link.rel = "stylesheet"
-    link.href = eduUtils.path("eduZOO/css/eduZOO.css")
-    document.head.appendChild(link)
+    eduUtils.loadStylesheet("eduZOO/css/eduZOO.css")
+    eduUtils.loadScript("eduZOO-app/script/lib/MathJax/MathJax.js?config=TeX-AMS_HTML")
 })
