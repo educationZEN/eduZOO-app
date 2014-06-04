@@ -146,7 +146,37 @@ angular.module("eduZOO", [])
     eduUtils.loadStylesheet("eduZOO/css/eduZOO.css")
     eduUtils.loadScript("eduZOO-app/script/lib/MathJax/MathJax.js?config=TeX-AMS_HTML")
     //
+    addFacebookComments()
     addGoogleAnalytics()
+
+    function addFacebookComments() {
+        loadFbSDK()
+        createFbRootDiv()
+        createFbCommentsWidget()
+
+        function loadFbSDK() {
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=1513418668879103";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        }
+
+        function createFbRootDiv() {
+            var div = document.createElement("div")
+            div.id = "fb-root"
+            document.body.appendChild(div)
+        }
+
+        function createFbCommentsWidget() {
+            var div = document.createElement("div")
+            div.setAttribute("class", "fb-comments")
+            div.setAttribute("data-href", location.href)
+            document.body.appendChild(div)
+        }
+    }
 
     function addGoogleAnalytics() {
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
