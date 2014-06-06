@@ -91,7 +91,7 @@ angular.module("eduZOO", [])
         restrict: "E",
         link: function(scope, element, attrs, controller) {
             var texElem = element[0]
-            if (attrs.inline == undefined) {
+            if (attrs.p != undefined) {
                 texElem.textContent = "$$" + texElem.textContent + "$$"
             } else {
                 texElem.textContent = "\\(" + texElem.textContent + "\\)"
