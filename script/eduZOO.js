@@ -174,6 +174,7 @@ angular.module("eduZOO", [])
             var div = document.createElement("div")
             div.setAttribute("class", "fb-comments")
             div.setAttribute("data-href", location.href)
+            div.setAttribut("align","center")
             document.body.appendChild(div)
         }
     }
