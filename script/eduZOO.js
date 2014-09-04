@@ -167,8 +167,7 @@ angular.module("eduZOO", [])
         function createFbRootDiv() {
             var div = document.createElement("div")
             div.id = "fb-root"
-            div.style.marginLeft = 'auto';
-            div.style.marginRight = 'auto';
+            div.style.text-align = 'center';
             document.body.appendChild(div)
         }
 
@@ -176,6 +175,7 @@ angular.module("eduZOO", [])
             var div = document.createElement("div")
             div.setAttribute("class", "fb-comments")
             div.setAttribute("data-href", location.href)
+            div.style.text-align = 'center';
             document.body.appendChild(div)
         }
     }
