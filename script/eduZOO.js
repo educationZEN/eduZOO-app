@@ -78,7 +78,7 @@ angular.module("eduZOO", [])
         template: "<br /><input type='text' ng-model='text' ng-init='text=\"\"' ng-keypress='handleKey($event.keyCode)'>",
         link: function(scope, element, attrs, controller) {
             controller.addAnswer(scope)
-            scope.handleKey = function(keyCode) {    
+            scope.handleKey = function(keyCode) {
                 if (keyCode == 13) {
                     controller.checkAnswers()
                 }
@@ -167,6 +167,7 @@ angular.module("eduZOO", [])
         function createFbRootDiv() {
             var div = document.createElement("div")
             div.id = "fb-root"
+            displayAlign: "center"
             document.body.appendChild(div)
         }
 
