@@ -167,6 +167,7 @@ angular.module("eduZOO", [])
         function createFbRootDiv() {
             var div = document.createElement("div")
             div.id = "fb-root"
+            div.style="text-align:right;"
             document.body.appendChild(div)
         }
 
