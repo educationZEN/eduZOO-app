@@ -2,9 +2,10 @@
 <link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/core-field/core-field.html">
 
 
-<polymer-element name="eduzoo-quiz">
+<polymer-element name="eduzoo-quiz" attributes="multi">
     <template>
         <style>
 
@@ -43,6 +44,7 @@
         Polymer({
             result: "",
             nrTries: 0,
+            multi: true,
             currentAnswer: null,
             ready: function(){
                 nrOfAnwers = this.querySelectorAll('eduzoo-quiz-choice').length
@@ -59,20 +61,41 @@
         },
             newSelection: function(j){
                 this.currentAnswer = j;
+                console.log(this.multi)
                 nrOfAnwers = this.querySelectorAll('eduzoo-quiz-choice').length
                 answers = this.querySelectorAll('eduzoo-quiz-choice')
                 for (var i = 0;i<nrOfAnwers;i++) {
-                    if (i!=j){
+                    if (i!=j && !this.multi){
                         answers[i].unCheck()
                     }
                    //answers[i].addEventListener("select", function(){})
                 }
             },
             checkAnswer: function(){
-                if (this.currentAnswer != null) {
+                if (this.currentAnswer != null && !this.multi) {
                     answer = this.querySelectorAll('eduzoo-quiz-choice')[this.currentAnswer]
 
                     if(answer.isCorrect()){
+                        this.result = "Your answer is correct"
+                    } else {
+                        this.nrTries++
+                        this.result = "Your answer is wrong, your tried "+this.nrTries+" times"
+                    }
+                } else if (this.multi){
+                    right = true;
+                    nrOfAnwers = this.querySelectorAll('eduzoo-quiz-choice').length
+                    answers = this.querySelectorAll('eduzoo-quiz-choice')
+                    for (var i = 0;i<nrOfAnwers;i++) {
+                       if (right) {
+                           if (answers[i].isCorrect()) {
+                               right = answers[i].isChecked()
+                           } else {
+                               right = !answers[i].isChecked()
+                           }
+                       }
+                        //answers[i].addEventListener("select", function(){})
+                    }
+                    if(right){
                         this.result = "Your answer is correct"
                     } else {
                         this.nrTries++
@@ -89,16 +112,18 @@
     <template>
         <style>
 
-
+            #answerstring {
+                margin-left: 1em;
+            }
 
         </style>
 
-        <div layout horizontal>
+        <core-field>
             <paper-checkbox checked="{{checked}}" on-change="{{onChange}}"></paper-checkbox>
-            <div>
+            <div id="answerstring">
                 <content></content>
             </div>
-        </div>
+        </core-field>
 
 
     </template>
@@ -119,6 +144,10 @@
 
             isCorrect: function(){
               return this.correct
+            } ,
+
+            isChecked: function(){
+              return this.checked
             }
         })
     </script>
@@ -128,16 +157,14 @@
     <template>
         <style>
 
-        :host {
-            font-size: 1.5em;
-        }
+
 
         </style>
 
         <div layout horizontal>
-            <div>
+            <h3>
                 <content></content>
-            </div>
+            </h3>
         </div>
 
 
