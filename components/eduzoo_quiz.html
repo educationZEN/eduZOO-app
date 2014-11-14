@@ -1,0 +1,145 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+
+<polymer-element name="eduzoo-quiz">
+    <template>
+        <style>
+
+            paper-shadow {
+                /*background-color: green;*/
+                background-color: #E3E4FA;
+                padding: 1.5em;
+                margin-top: 0.75em;
+                margin-bottom: 0.75em;
+                max-width: 48em;
+                margin-left: auto ;
+                margin-right: auto ;
+            }
+
+            paper-button {
+                color: #1A0DAB
+            }
+
+        </style>
+        <div id="content" relative>
+
+            <paper-shadow z="1">
+                <div layout vertical>
+               <content></content>
+                <paper-button self-end on-tap="{{checkAnswer}}">Check Answer</paper-button>
+                    <div id="answer">
+                        {{result}}
+                    </div>
+                </div>
+            </paper-shadow>
+        </div>
+
+    </template>
+    <script>
+
+        Polymer({
+            result: "",
+            nrTries: 0,
+            currentAnswer: null,
+            ready: function(){
+                nrOfAnwers = this.querySelectorAll('eduzoo-quiz-choice').length
+                answers = this.querySelectorAll('eduzoo-quiz-choice')
+                for (var i = 0;i<nrOfAnwers;i++) {
+                    answers[i].addEventListener("select", this.getHandler(i))
+                }
+            },
+             getHandler: function(n) {
+                 that = this
+                 return function() {
+                     that.newSelection(n)
+            }
+        },
+            newSelection: function(j){
+                this.currentAnswer = j;
+                nrOfAnwers = this.querySelectorAll('eduzoo-quiz-choice').length
+                answers = this.querySelectorAll('eduzoo-quiz-choice')
+                for (var i = 0;i<nrOfAnwers;i++) {
+                    if (i!=j){
+                        answers[i].unCheck()
+                    }
+                   //answers[i].addEventListener("select", function(){})
+                }
+            },
+            checkAnswer: function(){
+                if (this.currentAnswer != null) {
+                    answer = this.querySelectorAll('eduzoo-quiz-choice')[this.currentAnswer]
+
+                    if(answer.isCorrect()){
+                        this.result = "Your answer is correct"
+                    } else {
+                        this.nrTries++
+                        this.result = "Your answer is wrong, your tried "+this.nrTries+" times"
+                    }
+                }
+            }
+        })
+    </script>
+
+</polymer-element>
+
+<polymer-element name="eduzoo-quiz-choice" attributes="correct">
+    <template>
+        <style>
+
+
+
+        </style>
+
+        <div layout horizontal>
+            <paper-checkbox checked="{{checked}}" on-change="{{onChange}}"></paper-checkbox>
+            <div>
+                <content></content>
+            </div>
+        </div>
+
+
+    </template>
+    <script>
+        Polymer({
+            correct: false,
+            checked: false,
+            onChange: function(){
+                if (this.checked){
+                    this.fire('select');
+                }
+
+            },
+
+            unCheck: function(){
+              this.checked = false
+            },
+
+            isCorrect: function(){
+              return this.correct
+            }
+        })
+    </script>
+</polymer-element>
+
+<polymer-element name="eduzoo-quiz-question" attributes="correct" noscript>
+    <template>
+        <style>
+
+        :host {
+            font-size: 1.5em;
+        }
+
+        </style>
+
+        <div layout horizontal>
+            <div>
+                <content></content>
+            </div>
+        </div>
+
+
+    </template>
+    </polymer-element>

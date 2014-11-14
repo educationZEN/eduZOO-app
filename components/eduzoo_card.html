@@ -1,0 +1,31 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
+
+
+<polymer-element name="eduzoo-card" noscript>
+    <template>
+        <style>
+
+
+            paper-shadow {
+                /*background-color: green;*/
+                background-color: #E3E4FA;
+                padding: 1.5em;
+                margin-top: 0.75em;
+                margin-bottom: 0.75em;
+                max-width: 48em;
+                margin-left: auto ;
+                margin-right: auto ;
+            }
+        </style>
+        <div id="content" relative>
+
+            <paper-shadow z="1">
+                <content select="h2"></content>
+                <content></content>
+            </paper-shadow>
+        </div>
+
+    </template>
+
+</polymer-element>

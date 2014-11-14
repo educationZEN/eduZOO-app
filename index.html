@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+
+
+    <link rel="import" href="components/eduzoo_app.html">
+    <link rel="import" href="components/eduzoo_definition.html">
+    <link rel="import" href="components/eduzoo_example.html">
+    <link rel="import" href="components/math-tex.html">
+    <link rel="import" href="components/eduzoo_quiz.html">
+
+</head>
+
+<body fullbleed unresolved>
+ <eduzoo-app courseName="Mathematik fuer PhysikerInnen III"
+         zooTitle="Abbildungen I"
+>
+
+
+         <p><!-- 1. Absatz: Ziel und Motivation -->
+             Der Begriff der Menge allein reicht nicht aus, um die Welt zu
+             beschreiben. Wir können jetzt zwar eindeutig sagen, welche Personen
+             in Berlin leben, um aber jedem Berliner einen Wohnort zu geben,
+             müssten wir uns mit vielen Teilmengen auseinandersetzen. Der Vorteil,
+             den uns der Mengenbegriff verschafft hat wäre dahin. Es gibt jedoch
+             die Möglichkeit, den Elementen der Menge der Berliner (also den
+             Berlinern) Koordinaten zuzuordnen. Dies leistet eine Abbildung.
+         </p>
+
+         <eduzoo-definition>
+             <p>
+                 Seien <math-tex>M,N</math-tex> Mengen. Eine
+                 <em>Abbildung</em> oder <em>Funktion von <math-tex>M</math-tex> nach <math-tex>N</math-tex></em> ist
+                 ein Tripel <math-tex>(M,N,f)</math-tex>, bestehend aus dem
+                 <em>Definitionsbereich</em> <math-tex>M</math-tex>, dem <em>Wertebereich</em> <math-tex>N</math-tex>
+                 und der Zuordnungsvorschrift <math-tex>f</math-tex>, die jedem Element von <math-tex>M</math-tex>
+                 genau ein Element aus <math-tex>N</math-tex> zuweist. Für <math-tex>x\in M</math-tex> bezeichnet
+                 <math-tex>f(x)</math-tex> das Element aus <math-tex>N</math-tex>, das <math-tex>x</math-tex> zugeordnet wird. Die
+                 Abbildung wird notiert als <math-tex p>f:M\to N, x\mapsto f(x)</math-tex>
+                 Das Element <math-tex>f(x)</math-tex> heißt <em>Bild</em> von <math-tex>x</math-tex> unter <math-tex>f</math-tex>,
+                 das Element <math-tex>x</math-tex> heißt <em>Urbild</em> von <math-tex>f(x)</math-tex>.
+             </p>
+         </eduzoo-definition>
+
+         <p>
+             Die Zeile <math-tex>f:M\to N, x\mapsto f(x)</math-tex> wird gesprochen
+             "f von M nach N, x wird abgebildet auf f von x". Wesentlich an der
+             Definition ist, dass jedes Urbild <u>genau ein</u> Bild besitzt und
+             nicht mehrere. Eine Person hält sich an genau einem Ort auf.<br>
+             Sind Definitions- und Wertebereich klar, so wird statt <math-tex>(M,N,f)</math-tex>
+             schlicht <math-tex>f</math-tex> geschrieben.<br>
+         </p>
+
+
+         <eduzoo-example>
+             <p>
+                 Es bezeichne <math-tex>\mathcal{L}</math-tex> die Menge aller Längengrade,
+                 <math-tex>\mathcal{B}</math-tex> die Menge aller Breitengrade,
+                 <math-tex>\mathcal{O}=\mathcal{L}\times\mathcal{B}</math-tex> die Menge
+                 aller Koordinaten der Orte auf der Erde, <math-tex>\mathcal{P}</math-tex> die
+                 Menge aller Personen, <math-tex>\omega</math-tex> die Abbildung, die jeder
+                 Person die Koordinaten ihres momentanen Aufenthaltsorts zuweist.
+                 Dann ist
+                 <math-tex p>\omega:\mathcal{P}\to\mathcal{O}\; ,\; p\mapsto\omega(p)=(l,b)
+                 </math-tex> eine Abbildung, da sich an bestimmten Koordinaten immer nur
+                 eine Person befinden kann. Jedoch definiert
+                 <math-tex p>\phi:\mathcal{O}\to\mathcal{P}\; ,\; (l,b)\mapsto\phi(l,b)=p
+                 </math-tex> keine Abbildung, da nicht jedem Ort notwendigerweise eine
+                 Person zugeordnet werden kann.
+             </p>
+         </eduzoo-example>
+
+         <p>
+             Eine Abbildung ordnet <u>jedem</u> Element des Definitionsbereichs
+             höchstens ein Element des Wertebreichs zu. Alle Elemente des
+             Definitionsbereichs müssen abgebildet werden, aber nicht alle
+             Elemente des Wertebereichs müssen ein Urbild haben.
+         </p>
+
+
+         <h2>Injektivität, Surjektivität, Bijektivität</h2>
+
+
+         <p>
+             Häufige Problemstellung beinhalten das Lösen von Gleichungen
+             <math-tex>f(x)=y</math-tex> für eine gegebene Funktion <math-tex>f</math-tex>. Gibt es ein <math-tex>x</math-tex> im
+             Definitionsbereich, das die Gleichung erfüllt, so heißt <math-tex>x</math-tex>
+             Lösung der Gleichung. Ist dieses <math-tex>x</math-tex> eindeutig, so lässt sich
+             die Gleichung auflösen nach <math-tex>x</math-tex>, mit dem funktionalen Zusammenhang
+             <math-tex>x=g(y)</math-tex>, wobei <math-tex>g</math-tex> eine neue Funktion ist, die sogenannte
+             Inverse von <math-tex>f</math-tex>. Im Folgenden werden die Begriffe eingeführt, die
+             notwendig sind, um die inverse Funktion zu zu definieren.
+         </p>
+
+
+         <eduzoo-definition cardtitle="Definition: Injektivität">
+             <p>
+                 Eine Abbildung <math-tex>f:\mathcal{D}\to\mathcal{W}</math-tex> heißt
+                 <em>injektiv</em>, genau dann wenn jedes Element des
+                 Wertebereichs höchstens ein Urbild besitzt.
+             </p>
+         </eduzoo-definition>
+
+         <p>
+             Das bedeutet nicht, dass jedes Element des Wertebereichs ein Urbild
+             besitzt. Es bedeutet, dass <u>wenn</u> ein Element des Wertebereichs
+             ein Urbild besitzt, so ist dieses eindeutig. Streng formuliert
+             ist eine Abbildung <math-tex>f:\mathcal{D}\to\mathcal{W}</math-tex> also
+             injektiv, falls aus <math-tex>f(x)=f(y)</math-tex> folgt, dass <math-tex>x=y</math-tex>.
+         </p>
+
+         <eduzoo-definition cardtitle="Definition: Surjektivität">
+             <p>
+                 Eine Abbildung <math-tex>f:\mathcal{D}\to\mathcal{W}</math-tex> heißt
+                 <em>surjektiv</em>, genau dann wenn jedes Element des
+                 Wertebereichs ein Urbild besitzt.
+             </p>
+         </eduzoo-definition>
+
+         <p>
+             Hier ist der Unterschied im Wortlaut der Definitionen von
+             Injektivität und Surjektivität zu beachten. Während bei
+             Injektivität jedes Element des Wertebreichs <u>höchstens</u> ein
+             Urbild hat, so hat bei Surjektivität jedes Element des Wertebereichs
+             <u>mindestens</u> ein Urbild. Ist eine Funktion also injektiv und
+             surjektiv zugleich, folgt, dass jedes Element des Wertebereichs
+             <u>genau ein</u> Urbild hat, die Zuordnung also nicht nur eindeutig,
+             sondern <em>eineindeutig</em> ist.
+         </p>
+
+    
+
+         <eduzoo-definition cardtitle="Definition: Bijektivität, Umkehrabbildung">
+             <p>
+                 Eine Abbildung <math-tex>f:\mathcal{D}\to\mathcal{W}</math-tex> heißt
+                 <em>bijektiv</em>, genau dann wenn sie injektiv und surjektiv ist.
+                 In diesem Fall definiert
+                 <math-tex p>
+                     f^{-1}:\mathcal{W}\to\mathcal{D}\;,\;y=f(x)\mapsto f^{-1}(y)=x
+                 </math-tex>
+                 eine Abbildung, die <em>Umkehrabbildung</em> oder <em>Inverse</em>
+                 von <math-tex>f</math-tex>
+             </p>
+         </eduzoo-definition>
+
+         <p>
+             Der Wertebereich einer Funktion kann immer so gewählt werden, dass
+             die Funktion surjektiv ist. Die Menge
+             <math-tex p>f(\mathcal{D})=\{f(x)|x\in\mathcal{D}\}</math-tex> ist die Menge
+             aller Bilder und beschert als Wertebereich einer Funktion immer
+             Surjektivität.
+         </p>
+
+         <p>
+             Die Inverse <math-tex>f^{-1}</math-tex> wird nicht "f hoch minus eins"
+             gesprochen sondern "f invers". Es ist zu beachten, dass
+             <math-tex>f^{-1}</math-tex> im Allgmeinen <u>nicht</u> den Kehrwert der
+             Funktion <math-tex>f</math-tex> darstellt, also
+             <math-tex>f^{-1}(x)\neq\frac{1}{f(x)}</math-tex> im Allgemeinen.
+         </p>
+
+
+         <h2>Test</h2>
+
+
+
+         <eduzoo-quiz>
+             <eduzoo-quiz-question>
+                 Sei
+                 <math-tex p>
+                     f:\mathbb{R}\to\mathbb{R}\; ,\; x\mapsto x^2
+                 </math-tex> Welche Aussagen sind wahr?
+             </eduzoo-quiz-question>
+
+             <eduzoo-quiz-choice correct>
+                 Der Definitionsbereich von <math-tex>f</math-tex> sind alle reellen Zahlen.
+             </eduzoo-quiz-choice>
+
+             <eduzoo-quiz-choice>
+                 Der Wertebereich von <math-tex>f</math-tex> sind die positiven reellen Zahlen und
+                 Null.
+             </eduzoo-quiz-choice>
+
+             <eduzoo-quiz-choice correct>
+                 Der Wertebereich von <math-tex>f</math-tex> sind alle reellen Zahlen.
+             </eduzoo-quiz-choice>
+
+             <eduzoo-quiz-choice correct>
+                 <math-tex>f(x)=x^2</math-tex>
+             </eduzoo-quiz-choice>
+
+             <eduzoo-quiz-choice correct>
+                 Die Zahl 11 hat ein Urbild unter <math-tex>f</math-tex>.
+             </eduzoo-quiz-choice>
+
+             <eduzoo-quiz-choice>
+                 Die Zahl -11 hat ein Urbild unter <math-tex>f</math-tex>.
+             </eduzoo-quiz-choice>
+
+             <eduzoo-quiz-choice>
+                 <math-tex>f</math-tex> ist injektiv.
+             </eduzoo-quiz-choice>
+
+             <eduzoo-quiz-choice>
+                 <math-tex>f</math-tex> ist surjektiv.
+             </eduzoo-quiz-choice>
+
+             <eduzoo-quiz-choice correct>
+                 <math-tex>f:\mathbb{R^+}\to\mathbb{R}</math-tex> ist injektiv.
+             </eduzoo-quiz-choice>
+
+             <eduzoo-quiz-choice>
+                 <math-tex>f:\mathbb{R^+}\to\mathbb{R}</math-tex> ist surjektiv.
+             </eduzoo-quiz-choice>
+
+             <eduzoo-quiz-choice correct>
+                 <math-tex>f:\mathbb{R}\to\mathbb{R^+}</math-tex> ist surjektiv.
+             </eduzoo-quiz-choice>
+         </eduzoo-quiz>
+
+
+         <h2>Übungsaufgabe</h2>
+
+
+         <p>
+             Sie werden beauftragt ein neues Postleitzahlensystem für
+             Deutschland einzuführen. Geben Sie Definitionsbereich
+             <math-tex>\mathcal{D}</math-tex> und Wertebereich <math-tex>\mathcal{W}</math-tex>
+             so an, dass die zur Zuordnungsvorschrift
+             <math-tex p>
+                 Z:\mbox{Person } p\mapsto\mbox{Postleitzahl }Z(p)\mbox{ von }p
+             </math-tex>
+             gehörige Abbildung <math-tex>Z:\mathcal{D}\to\mathcal{W}</math-tex>
+         <ol type="i">
+             <li>injektiv ist, aber nicht surjektiv.</li>
+             <li>surjektiv ist, aber nicht injektiv.</li>
+             <li>bijektiv ist.</li>
+         </ol>
+         </p>
+
+
+         <!--
+         <quiz>
+             <question>
+                 Und ein Test mit Eingabe. Die richtige Antwort lautet 42.
+             </question>
+
+             <math-textinput correct="42"></math-textinput>
+         </quiz>
+         -->
+
+
+
+</eduzoo-app>
+
+</body>
+
+</html>

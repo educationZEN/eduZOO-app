@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
+
+
+<polymer-element name="eduzoo-definition" attributes="cardtitle">
+    <template>
+        <style>
+            paper-shadow {
+                background-color: #E3E4FA;
+                padding: 1.5em;
+                margin-top: 0.75em;
+                margin-bottom: 0.75em;
+                max-width: 48em;
+                margin-left: auto ;
+                margin-right: auto ;
+            }
+        </style>
+
+        <div id="content" relative>
+
+            <paper-shadow z="5">
+                <h2>{{cardtitle}}</h2>
+                <content></content>
+            </paper-shadow>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            cardtitle: 'Definition'
+        })
+    </script>
+
+</polymer-element>
