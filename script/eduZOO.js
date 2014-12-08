@@ -159,7 +159,7 @@ angular.module("eduZOO", [])
               var js, fjs = d.getElementsByTagName(s)[0];
               if (d.getElementById(id)) return;
               js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=1513418668879103";
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=724182117663532";
               fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         }
